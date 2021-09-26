@@ -6,7 +6,7 @@ app.use(express.json());
 const port: number = 3000;
 const ok: number = 200;
 
-// Http response koodid
+// Http response codes
 const responseCodes = {
   ok: 200,
   created: 201,
@@ -14,14 +14,14 @@ const responseCodes = {
   badRequest: 400,
   notFound: 404,
 };
-// Dummy andmebaas
+// Dummy database
 const db = {
   jobList: [
     {
       id: 1,
       lat: 58.91741, // latitude
       lng: 23.698196, // longitude
-      note: "On these coordinates is an issue to handle", // memo
+      note: "On these coordinates is an issue to handle", //
       completion: false, // user can change status of completion if job is done
     },
   ],
@@ -152,6 +152,51 @@ app.delete("/users/:id", (req: Request, res: Response) => {
     });
   }
   db.users.splice(index, 1);
+  return res.status(responseCodes.noContent).send();
+});
+
+// DELETING JOBS
+app.delete("/jobs/:id", (req: Request, res: Response) => {
+  const id: number = parseInt(req.params.id, 10);
+  if (!id) {
+    return res.status(responseCodes.badRequest).json({
+      error: "No valid id provided",
+    });
+  }
+  const index = db.jobList.findIndex((element) => element.id === id);
+  if (index < 0) {
+    return res.status(responseCodes.badRequest).json({
+      message: `Job not found with id: ${id}`,
+    });
+  }
+  db.jobList.splice(index, 1);
+  return res.status(responseCodes.noContent).send();
+});
+
+// CHANGING JOB STATUS
+app.patch("/jobs/:id", (req: Request, res: Response) => {
+  const id: number = parseInt(req.params.id, 10);
+  const { completion } = req.body;
+  if (!id) {
+    return res.status(responseCodes.badRequest).json({
+      error: "No valid id provided",
+    });
+  }
+  if (!completion) {
+    return res.status(responseCodes.badRequest).json({
+      error: "Nothing to update",
+    });
+  }
+  const index = db.jobList.findIndex((element) => element.id === id);
+  if (index < 0) {
+    return res.status(400).json({
+      error: `No job found with id: ${id}`,
+    });
+  }
+  if (completion) {
+    db.jobList[index].completion = true;
+  }
+
   return res.status(responseCodes.noContent).send();
 });
 /////////////////////////////////////////////////////
