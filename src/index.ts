@@ -1,60 +1,23 @@
 import express, { Request, Response, Application } from "express";
 
+//import db from "./db";
+import usersController from "./components/users/controller";
+//import responseCodes from "./components/general/responseCodes";
+import { port } from "./components/general/settings";
+
 const app: Application = express();
 app.use(express.json());
 
-const port: number = 3000;
-const ok: number = 200;
+/*
+ * *********************** Users ******************
+ */
+app.get("/users", usersController.getAllUsers);
+app.get("/users/:id", usersController.getUserById);
+app.delete("/users/:id", usersController.removeUser);
+app.post("/users", usersController.createUser);
+app.patch("/users/:id", usersController.updateUser);
 
-// Http response codes
-const responseCodes = {
-  ok: 200,
-  created: 201,
-  noContent: 204,
-  badRequest: 400,
-  notFound: 404,
-};
-// Dummy database
-const db = {
-  jobList: [
-    {
-      id: 1,
-      lat: 58.91741, // latitude
-      lng: 23.698196, // longitude
-      note: "On these coordinates is an issue to handle", //
-      completion: false, // user can change status of completion if job is done
-    },
-  ],
-  users: [{ id: 1, firstName: "Salim", lastName: "Shady" }],
-};
-
-/////////////////////////////////////////////////////
-// SHOWING THE USERS
-app.get("/users", (req: Request, res: Response) => {
-  const { users } = db;
-  return res.status(responseCodes.ok).json({
-    users,
-  });
-});
-
-app.get("/users/:id", (req: Request, res: Response) => {
-  const id: number = parseInt(req.params.id, 10);
-  if (!id) {
-    return res.status(responseCodes.badRequest).json({
-      error: "No valid id provided",
-    });
-  }
-  const user = db.users.find((element) => element.id === id);
-  if (!user) {
-    return res.status(responseCodes.badRequest).json({
-      error: `No user found with id: ${id}`,
-    });
-  }
-  return res.status(responseCodes.ok).json({
-    user,
-  });
-});
-// SHOWING THE JOBLIST
+/* // SHOWING THE JOBLIST
 app.get("/jobs", (req: Request, res: Response) => {
   const { jobList } = db;
   return res.status(responseCodes.ok).json({
@@ -80,29 +43,6 @@ app.get("/jobs/:id", (req: Request, res: Response) => {
   });
 });
 /////////////////////////////////////////////////////
-// ADDING USERS
-app.post("/users", (req: Request, res: Response) => {
-  const { firstName, lastName } = req.body;
-  if (!firstName) {
-    return res.status(responseCodes.badRequest).json({
-      error: "First name is required",
-    });
-  }
-  if (!lastName) {
-    return res.status(responseCodes.badRequest).json({
-      error: "Last name is required",
-    });
-  }
-  const id = db.users.length + 1;
-  db.users.push({
-    id,
-    firstName,
-    lastName,
-  });
-  return res.status(responseCodes.created).json({
-    id,
-  });
-});
 
 // ADDING JOBS
 app.post("/jobs", (req: Request, res: Response) => {
@@ -137,23 +77,6 @@ app.post("/jobs", (req: Request, res: Response) => {
   });
 });
 /////////////////////////////////////////////////////
-// DELETING USERS
-app.delete("/users/:id", (req: Request, res: Response) => {
-  const id: number = parseInt(req.params.id, 10);
-  if (!id) {
-    return res.status(responseCodes.badRequest).json({
-      error: "No valid id provided",
-    });
-  }
-  const index = db.users.findIndex((element) => element.id === id);
-  if (index < 0) {
-    return res.status(responseCodes.badRequest).json({
-      message: `User not found with id: ${id}`,
-    });
-  }
-  db.users.splice(index, 1);
-  return res.status(responseCodes.noContent).send();
-});
 
 // DELETING JOBS
 app.delete("/jobs/:id", (req: Request, res: Response) => {
@@ -198,11 +121,10 @@ app.patch("/jobs/:id", (req: Request, res: Response) => {
   }
 
   return res.status(responseCodes.noContent).send();
-});
+}); */
 /////////////////////////////////////////////////////
 
 app.listen(port, () => {
-  // eslint-disable-next-line no-console
   console.log(
     `App is running on port ${port}, visit http://localhost:3000/users for example`
   );
