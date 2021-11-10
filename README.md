@@ -1,6 +1,5 @@
-# kaardirakendus
-Prog 2 teemal projekt
-#####################################################
+# Siimu kaardirakendus
+
 
 ## I kodutöö:
 
@@ -11,7 +10,7 @@ Töö front-end poolt üritan arendada Hr Jaagup Kippari Veebirakenduste loengu 
 API, mille github link https://github.com/siimsep/kaardirakendus, võimaldab praegu punkte ja kasutajaid lisada, muuta, kustutada jms. Palju on võetud šnitti Teie valmis koodist. Valmis rakenduseks oleks vaja API kuidagi front-endiga
 siduda, aga kuidas seda oleks kõige mõistlikum ja õigem teha, ma veel ei tea. Loodetavasti me veel õpime seda, aga eks ise üritan ka veel uurida ja katsetada lahendusi.
 
-#####################################################
-II kodutöö:
+
+## II kodutöö:
 Lisatud on controllerid, service'd ja swagger-ui openapi tööle pandud. Suhteliselt samamoodi nagu Teie õpetatud materjalides. Proovisin alguses nt OpenAPI saada tööle ainult nende enda dokumentatsiooni järgides, aga see oli ikka üsna keeruline kompott, Teie video abil järge ajades sain asjad ilusti tööle.
 Plaanis veel: mock database asendada Google Firebase lahendusega, React.js front-end, Leaflet.js kaardikuva. WORK IN PROGRESS..
