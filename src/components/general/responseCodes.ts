@@ -7,6 +7,7 @@ const responseCodes = {
   noContent: 204,
   badRequest: 400,
   notFound: 404,
+  notAuthorized: 401,
 };
 
 export default responseCodes;

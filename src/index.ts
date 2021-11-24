@@ -2,6 +2,7 @@ import express, { Request, Response, Application } from "express";
 import usersController from "./components/users/controller";
 import jobController from "./components/jobs/controller";
 import { port } from "./components/general/settings";
+import authController from "./components/auth/controller";
 
 import swaggerUi from "swagger-ui-express";
 import openapi from "./openapi.json";
@@ -11,6 +12,7 @@ import openapi from "./openapi.json";
  * What is CORS?: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
  */
 import cors from "cors";
+
 /**
 
 /*
@@ -36,6 +38,11 @@ app.get("/users/:id", usersController.getUserById);
 app.delete("/users/:id", usersController.removeUser);
 app.post("/users", usersController.createUser);
 app.patch("/users/:id", usersController.updateUser);
+/*
+ * *********************** Login ******************
+ */
+app.post("/login", authController.login);
+
 /*
  * *********************** Jobs ******************
  */

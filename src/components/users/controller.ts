@@ -42,8 +42,8 @@ const usersController = {
     usersService.removeUser(id);
     return res.status(responseCodes.noContent).json({});
   },
-  createUser: (req: Request, res: Response) => {
-    const { firstName, lastName } = req.body;
+  createUser: async (req: Request, res: Response) => {
+    const { firstName, lastName, password, email, role } = req.body;
     if (!firstName) {
       return res.status(responseCodes.badRequest).json({
         error: "First name is required",
@@ -54,14 +54,32 @@ const usersController = {
         error: "Last name is required",
       });
     }
-    const id = usersService.createUser(firstName, lastName);
+    if (!email) {
+      return res.status(responseCodes.badRequest).json({
+        error: "Email is required",
+      });
+    }
+    if (!password) {
+      return res.status(responseCodes.badRequest).json({
+        error: "Password is required",
+      });
+    }
+
+    const id = await usersService.createUser(
+      firstName,
+      lastName,
+      password,
+      email,
+      role
+    );
+
     return res.status(responseCodes.created).json({
       id,
     });
   },
   updateUser: (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id, 10);
-    const { firstName, lastName } = req.body;
+    const { firstName, lastName, password, email, role } = req.body;
     if (!id) {
       return res.status(responseCodes.badRequest).json({
         error: "No valid id provided",

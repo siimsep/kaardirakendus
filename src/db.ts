@@ -17,11 +17,17 @@ const db: Db = {
       id: 1,
       firstName: "Juku",
       lastName: "Juurikas",
+      email: "juku@juurikas.ee",
+      password: "$2b$10$PIACoENUCFtIwlGWismpAO77TQuHCfLTP6wqLGHa0xYX3.Jh3Q1bm",
+      role: "Admin",
     },
     {
       id: 2,
       firstName: "Mari",
       lastName: "Maasikas",
+      email: "mari@maasikas.ee",
+      password: "$2b$10$TAM3mWbYswuHfXjmawF/t.//S9tI3XjyfHXKZb42TgSnlaDcFSyAS",
+      role: "User",
     },
   ],
 
