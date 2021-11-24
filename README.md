@@ -12,5 +12,8 @@ siduda, aga kuidas seda oleks kõige mõistlikum ja õigem teha, ma veel ei tea.
 
 
 ## II kodutöö:
-Lisatud on controllerid, service'd ja swagger-ui openapi tööle pandud. Suhteliselt samamoodi nagu Teie õpetatud materjalides. Proovisin alguses nt OpenAPI saada tööle ainult nende enda dokumentatsiooni järgides, aga see oli ikka üsna keeruline kompott, Teie video abil järge ajades sain asjad ilusti tööle.
-Plaanis veel: mock database asendada Google Firebase lahendusega, React.js front-end, Leaflet.js kaardikuva. WORK IN PROGRESS..
+Lisatud on controllerid, service'd ja swagger-ui openapi tööle pandud. Suhteliselt samamoodi nagu Teie õpetatud materjalides. Proovisin alguses nt OpenAPI saada tööle ainult nende enda dokumentatsiooni järgides, aga see oli ikka üsna keeruline kompott, Teie video abil järge ajades sain asjad ilusti tööle. 
+
+## III kodutöö: 
+Ei saa millegi pärast logimist tööle. Ütleb vastu "Check credentials", pean tunnivideo üle vaatama, kardan, et viga tuleb parooli hashimisest. 
+
